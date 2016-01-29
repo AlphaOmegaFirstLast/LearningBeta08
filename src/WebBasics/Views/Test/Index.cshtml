@@ -1,0 +1,134 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Test Page";
+}
+<div class="myLess">
+    to get Less.js compiles your less files at client side u need to get it included as mime type in web.config
+</div>
+
+<a class="btn btn-primary" role="button" data-toggle="collapse" aria-expanded="false" href="#divCaching" aria-controls="divCaching">
+    Caching
+</a>
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divDatabase" aria-expanded="false" aria-controls="divDatabase">
+    Database
+</button>
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divCommunication" aria-expanded="false" aria-controls="divDatabase">
+    Communication
+</button>
+<div id="divCaching" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+        <tr class="myGradient">
+            <th class="col-xs-2">Method</th>
+            <th class="col-xs-9">Parameters</th>
+            <th class="col-xs-1">Execute</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="danger">
+            <td>TestApi/SetAppCache</td>
+            <td><input type="text" class="form-control input-sm" value='{cacheKey:"applicationName" , value:"LearningApp"}'/></td>
+            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+        </tr>
+        <tr class="active">
+            <td>TestApi/GetAppCache</td>
+            <td><input type="text" class="form-control input-sm" value='cacheKey=applicationName'/></td>
+            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+        </tr>
+        <tr class="warning">
+            <td>TestApi/SetSessionCache</td>
+            <td><input type="text" class="form-control input-sm" value='{cacheKey:"userName" , value:"LearningUser"}'/></td>
+            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+        </tr>
+        <tr class="success">
+            <td>TestApi/GetSessionCache</td>
+            <td><input type="text" class="form-control input-sm" value='cacheKey=userName'/></td>
+            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="divDatabase" class="collapse"> Test
+    <table id="tblDatabase" class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="warning">
+                <td>Department/GetAll</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="warning">
+                <td>Department/GetById</td>
+                <td><input type="text" class="form-control input-sm" value='id=1' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="warning">
+                <td>Department/Insert</td>
+                <td><input type="text" class="form-control input-sm" value='{id:1 , name:"Depart1"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="warning">
+                <td>Department/Update</td>
+                <td><input type="text" class="form-control input-sm" value='{id:1, name:"Department11"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Put'></td>
+            </tr>
+            <tr class="warning">
+                <td>Department/Delete</td>
+                <td><input type="text" class="form-control input-sm" value='id=1' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Delete'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="divCommunication" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="danger">
+                <td>TestApi/SendEmail</td>
+                <td><input type="text" class="form-control input-sm" value='{addressTo:"santony106@yahoo.com" , subject:"test aspnet5 email" , body:"Hello"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/TestIntegration</td>
+                <td><input type="text" class="form-control input-sm" value='{addressTo:"santony106@yahoo.com" , subject:"test aspnet5 email" , body:"Hello"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/HttpClientGetAsync</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/HttpClientPostAsync</td>
+                <td><input type="text" class="form-control input-sm" value='{addressTo:"santony106@yahoo.com" , subject:"test aspnet5 email" , body:"Hello"}'  /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br />
+<div class="form-group">
+    <label>Result</label>
+    <textarea id="resultPanel" class="form-control" rows="20" ></textarea>
+</div>
+
+
+

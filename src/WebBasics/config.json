@@ -1,0 +1,5 @@
+﻿{
+  "Data": {
+    "ConnectionString": "Server=Suzette-PC\\SQLEXPRESS; Database=Test; user=sa; password=Pa33w0rd;"
+  }
+}

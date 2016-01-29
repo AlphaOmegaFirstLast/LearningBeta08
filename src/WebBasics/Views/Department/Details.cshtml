@@ -1,0 +1,17 @@
+﻿@model WebBasics.BusinessModels.Employee
+
+@{
+    ViewBag.Title = "Employee Details";
+}
+
+<div>
+    <dl class="dl-horizontal"> @*Description List*@
+        <dt><label asp-for="Name"></label></dt>
+        <dd>model.Name</dd>
+        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Id)</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="index"> Back To List</a>
+</p>
