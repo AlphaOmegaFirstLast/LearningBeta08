@@ -4,16 +4,16 @@
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class Endpoints
+    public partial class EndPoints
     {
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("EndPoint")]
-        public EndpointsEndPoint[] EndPoint { get; set; }
+        public EndPointsEndPoint[] EndPointsEndPoint { get; set; }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class EndpointsEndPoint
+    public partial class EndPointsEndPoint
     {
         /// <remarks/>
         public string ApiMethod { get; set; }

@@ -40,7 +40,7 @@ namespace WebBasics.SystemManagers
                         }
                         else
                         {
-                            response.Status.SetError(-1, "Get request error - Http Response status code:" + httpResponse.StatusCode);
+                            response.Status.SetError(-1, $"Get request error. Http Response code:{httpResponse.StatusCode}. url:{url}");
                         }
                     }
                 }
@@ -79,7 +79,7 @@ namespace WebBasics.SystemManagers
                         }
                         else
                         {
-                            response.Status.SetError(-1, "Post request error - Http Response status code:" + httpResponse.StatusCode);
+                            response.Status.SetError(-1, $"Post request error. Http Response code:{httpResponse.StatusCode}. url:{url}");
                         }
                     }
                 }

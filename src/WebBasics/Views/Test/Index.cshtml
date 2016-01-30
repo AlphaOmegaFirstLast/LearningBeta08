@@ -8,50 +8,74 @@
     to get Less.js compiles your less files at client side u need to get it included as mime type in web.config
 </div>
 
-<a class="btn btn-primary" role="button" data-toggle="collapse" aria-expanded="false" href="#divCaching" aria-controls="divCaching">
-    Caching
-</a>
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divDatabase" aria-expanded="false" aria-controls="divDatabase">
-    Database
-</button>
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divCommunication" aria-expanded="false" aria-controls="divDatabase">
-    Communication
-</button>
+<div>
+    <a class="btn btn-primary" role="button" data-toggle="collapse" aria-expanded="false" href="#divCaching" aria-controls="divCaching">
+        Caching
+    </a>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divDatabase" aria-expanded="false" aria-controls="divDatabase">
+        Database
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divCommunication" aria-expanded="false" aria-controls="divCommunication">
+        Communication
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divFileSystem" aria-expanded="false" aria-controls="divFileSystem">
+        File System & Xml
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divMaps" aria-expanded="false" aria-controls="divMaps">
+        Maps
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divAuthentication" aria-expanded="false" aria-controls="divAuthentication">
+        Authentication
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divSearch" aria-expanded="false" aria-controls="divSearch">
+        Search
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divReports" aria-expanded="false" aria-controls="divReports">
+        Reports
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divSocialMedia" aria-expanded="false" aria-controls="divSocialMedia">
+        Social Media
+    </button>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
 <div id="divCaching" class="collapse">
     <table class="table table-hover table-striped input-sm">
         <thead>
-        <tr class="myGradient">
-            <th class="col-xs-2">Method</th>
-            <th class="col-xs-9">Parameters</th>
-            <th class="col-xs-1">Execute</th>
-        </tr>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
         </thead>
         <tbody>
-        <tr class="danger">
-            <td>TestApi/SetAppCache</td>
-            <td><input type="text" class="form-control input-sm" value='{cacheKey:"applicationName" , value:"LearningApp"}'/></td>
-            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
-        </tr>
-        <tr class="active">
-            <td>TestApi/GetAppCache</td>
-            <td><input type="text" class="form-control input-sm" value='cacheKey=applicationName'/></td>
-            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
-        </tr>
-        <tr class="warning">
-            <td>TestApi/SetSessionCache</td>
-            <td><input type="text" class="form-control input-sm" value='{cacheKey:"userName" , value:"LearningUser"}'/></td>
-            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
-        </tr>
-        <tr class="success">
-            <td>TestApi/GetSessionCache</td>
-            <td><input type="text" class="form-control input-sm" value='cacheKey=userName'/></td>
-            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
-        </tr>
+            <tr class="danger">
+                <td>TestApi/SetAppCache</td>
+                <td><input type="text" class="form-control input-sm" value='{cacheKey:"applicationName" , value:"LearningApp"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="active">
+                <td>TestApi/GetAppCache</td>
+                <td><input type="text" class="form-control input-sm" value='cacheKey=applicationName' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="warning">
+                <td>TestApi/SetSessionCache</td>
+                <td><input type="text" class="form-control input-sm" value='{cacheKey:"userName" , value:"LearningUser"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="success">
+                <td>TestApi/GetSessionCache</td>
+                <td><input type="text" class="form-control input-sm" value='cacheKey=userName' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
         </tbody>
     </table>
 </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
 
-<div id="divDatabase" class="collapse"> Test
+<div id="divDatabase" class="collapse">
+    Test
     <table id="tblDatabase" class="table table-hover table-striped input-sm">
         <thead>
             <tr class="myGradient">
@@ -89,6 +113,7 @@
         </tbody>
     </table>
 </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
 
 <div id="divCommunication" class="collapse">
     <table class="table table-hover table-striped input-sm">
@@ -107,27 +132,167 @@
             </tr>
             <tr class="danger">
                 <td>TestApi/TestIntegration</td>
-                <td><input type="text" class="form-control input-sm" value='{addressTo:"santony106@yahoo.com" , subject:"test aspnet5 email" , body:"Hello"}' /></td>
-                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+                <td><input type="text" class="form-control input-sm" value='{Id:"1", Name:"Samy"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
             </tr>
             <tr class="danger">
-                <td>TestApi/HttpClientGetAsync</td>
+                <td>TestApi/RequestClientGet</td>
                 <td><input type="text" class="form-control input-sm" value='' /></td>
                 <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
             </tr>
             <tr class="danger">
-                <td>TestApi/HttpClientPostAsync</td>
-                <td><input type="text" class="form-control input-sm" value='{addressTo:"santony106@yahoo.com" , subject:"test aspnet5 email" , body:"Hello"}'  /></td>
+                <td>TestApi/RequestClientPostAsJson</td>
+                <td><input type="text" class="form-control input-sm" value='{Id:"1", Name:"Samy"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/DownloadFileToServer</td>
+                <td><input type="text" class="form-control input-sm" value='{Url:"http://en.wikipedia.org/", FileName:"c:\\Temp\\testDownloadFromSite.html"}' /></td>
                 <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
             </tr>
         </tbody>
     </table>
 </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
 
+<div id="divFileSystem" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="danger">
+                <td>TestApi/GetObjectFromXml</td>
+                <td><input type="text" class="form-control input-sm" value='fileName=\Data\Endpoints.Production.xml' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/SetObjectToXml</td>
+                <td><input type="text" class="form-control input-sm" value='{ FileName:"\\test\\EndPoints.xml" ,  "EndPoints": {EndPointsEndPoint: [ {  "ApiMethod": "mehod1",   "CacheKey": "cache1" } , { "ApiMethod": "mehod2",    "CacheKey": "cache2" }  ]  } }' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/ReadTextFromFile</td>
+                <td><input type="text" class="form-control input-sm" value='fileName=\Test\TestText.txt' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/WriteTextToFile</td>
+                <td><input type="text" class="form-control input-sm" value='{ FileName:"\\Test\\TestText.txt" ,  "Text": "Hello" }' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
+<div id="divSearch" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="danger">
+                <td>TestApi/--</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
+<div id="divAuthentication" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="danger">
+                <td>TestApi/--</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
+<div id="divMaps" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+        <tr class="myGradient">
+            <th class="col-xs-2">Method</th>
+            <th class="col-xs-9">Parameters</th>
+            <th class="col-xs-1">Execute</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="danger">
+            <td>TestApi/--</td>
+            <td><input type="text" class="form-control input-sm" value=''/></td>
+            <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
+<div id="divSocialMedia" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="danger">
+                <td>TestApi/--</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
+<div id="divReports" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="danger">
+                <td>TestApi/--</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
 <br />
 <div class="form-group">
     <label>Result</label>
-    <textarea id="resultPanel" class="form-control" rows="20" ></textarea>
+    <textarea id="resultPanel" class="form-control" rows="20"></textarea>
 </div>
 
 

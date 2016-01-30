@@ -9,6 +9,7 @@ using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Linq;
 using WebBasics.SystemInterfaces;
 using WebBasics.SystemModels;
+using WebBasics.TestModels;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,22 +20,25 @@ namespace WebBasics.Controllers
     {
         private readonly IApplicationCache _appCache;
         private readonly ISessionCache _sessionCache;
-        private readonly IXmlManager _xmlManager;
         private readonly IRequestClient _requestClient;
+        private readonly IXmlManager _xmlManager;
+        private readonly ITextFileManager _textFileManager;
 
-        public TestApiController(IApplicationCache appCache, ISessionCache sessionCache,IXmlManager xmlManager, IRequestClient requestClient)
+
+        public TestApiController(IApplicationCache appCache, ISessionCache sessionCache, IXmlManager xmlManager, IRequestClient requestClient, ITextFileManager textFileManager)
         {
             _appCache = appCache;
             _sessionCache = sessionCache;
             _xmlManager = xmlManager;
             _requestClient = requestClient;
+            _textFileManager = textFileManager;
         }
 
         [HttpGet("GetAppCache")]
         public IActionResult GetAppCache(string cacheKey)
         {
-            var value =  _appCache.Get<string>(cacheKey);
-            var obj = new TestCache() {CacheKey = cacheKey, Value = value};
+            var value = _appCache.Get<string>(cacheKey);
+            var obj = new TestCache() { CacheKey = cacheKey, Value = value };
             var x = new ObjectResult(obj);
             return x;
         }
@@ -42,7 +46,7 @@ namespace WebBasics.Controllers
         [HttpPost("SetAppCache")]
         public TestCache SetAppCache([FromBody]TestCache testCache)
         {
-            _appCache.Set( testCache.CacheKey , testCache.Value);
+            _appCache.Set(testCache.CacheKey, testCache.Value);
             return testCache;
         }
 
@@ -63,71 +67,83 @@ namespace WebBasics.Controllers
         }
 
         [HttpGet("GetXml")]
-        public ApiResponse<Endpoints> GetXml(string fileName)
+        public ApiResponse<EndPoints> GetXml(string fileName)
         {
-            var response = _xmlManager.Get<Endpoints>(fileName);
+            var response = _xmlManager.Get<EndPoints>(fileName);
             return response;
         }
 
         [HttpPost("SetXml")]
-        public ApiResponse<Endpoints> SetXml([FromBody]TestXml  testXml)
+        public ApiResponse<EndPoints> SetXml([FromBody]TestXml testXml)
         {
-            var response = _xmlManager.Set<Endpoints>(testXml.FileName, testXml.Endpoints);
+            var response = _xmlManager.Set<EndPoints>(testXml.FileName, testXml.EndPoints);
             return response;
         }
 
         [HttpPost("TestIntegration")]
-        public ApiResponse<EmailInfo> TestIntegration([FromBody]EmailInfo emailInfo)
+        [HttpGet("TestIntegration")]
+        public ApiResponse<TestRequest> TestIntegration([FromBody]TestRequest testRequest)
         {
-            var response = new ApiResponse<EmailInfo>();
-            response.Status = new ApiStatus();
-            response.Data = emailInfo;
-            return response;
-        }
-
-        [HttpGet("HttpClientGetAsync")]
-        public async Task<ApiResponse<string>> HttpClientGetAsync()
-        {
-            var response = new ApiResponse<string>();
-            response.Status = new ApiStatus();
-            
-            string page = "http://en.wikipedia.org/";
-
-            using (var httpClient = new HttpClient())
-            using (var httpResponse = await httpClient.GetAsync(page))
-            using (var content = httpResponse.Content)
+            var response = new ApiResponse<TestRequest>();
+            if (testRequest != null)
             {
-                string result = await content.ReadAsStringAsync();
-                response.Data = result;
+                testRequest.Id = testRequest.Id * 2;
+                testRequest.Name = "Hello " + testRequest.Name;
+                response.Data = testRequest;
+            }
+            else
+            {
+                response.Data = new TestRequest() {Name="No data has been posted to the server. Http Method is: " + this.Request.Method };
             }
             return response;
         }
 
-        [HttpPost("HttpClientPostAsync")]
-        public async Task<ApiResponse<string>> HttpClientPostAsync([FromBody]EmailInfo emailInfo)
+        [HttpGet("RequestClientGet")]
+        public async Task<ApiResponse<string>> RequestClientGet()
+        {            
+            var url = "http://localhost:49732/api/TestApi/TestIntegration";
+            var response = await _requestClient.GetAsync(url);
+            return response;
+        }
+
+        [HttpPost("RequestClientPostAsJson")]
+        public async Task<ApiResponse<string>> HttpClientPostAsync([FromBody]TestRequest testRequest)
         {
-            var response = new ApiResponse<string>();
-            response.Status = new ApiStatus();
+            var url = "http://localhost:49732/api/TestApi/TestIntegration";
+            var response = await _requestClient.PostJsonAsync(url, testRequest);
+            return response;
+        }
+        [HttpPost("DownloadFileToServer")]
+        public async Task<ApiResponse<string>> DownloadFileToServer([FromBody] TestDownload testDownload)
+        {
+            var response = await _requestClient.DownloadFileAsync(testDownload.Url, testDownload.FileName);
+            return response;
+        }
+        [HttpGet("GetObjectFromXml")]
+        public ApiResponse<EndPoints> GetObjectFromXml([FromQuery]string fileName)
+        {
+            var response = _xmlManager.Get<EndPoints>(fileName);
+            return response;
+        }
 
-            string url = "http://localhost:49732/TestApi/TestIntegration";
-            var jObject = new JObject(emailInfo);
-            try
-            {
-                var stringContent = new StringContent(jObject.ToString());
+        [HttpPost("SetObjectToXml")]
+        public ApiResponse<EndPoints> SetObjectToXml([FromBody] TestXml testXml)
+        {
+            var response = _xmlManager.Set<EndPoints>(testXml.FileName, testXml.EndPoints);
+            return response;
+        }
 
-                using (var httpClient = new HttpClient())
-                using (var httpResponse = await httpClient.PostAsync(url, stringContent))
-                using (var content = httpResponse.Content)
-                {
-                    string result = await content.ReadAsStringAsync();
-                    response.Data = result;
-                }
+        [HttpGet("ReadTextFromFile")]
+        public async Task<ApiResponse<string>> ReadTextFromFile([FromQuery]string fileName)
+        {
+            var response = await _textFileManager.ReadText(fileName);
+            return response;
+        }
 
-            }
-            catch (Exception e)
-            {
-                response.Status.SetError(-1,"error in Post" ,e);               
-            }
+        [HttpPost("WriteTextToFile")]
+        public async Task<ApiResponse<string>> WriteTextToFile([FromBody] TestText testText)
+        {
+            var response = await _textFileManager.WriteText(testText.FileName, testText.Text);
             return response;
         }
 

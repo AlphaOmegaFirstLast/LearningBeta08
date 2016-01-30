@@ -51,7 +51,12 @@ namespace WebBasics
             var serviceDescriptor = new ServiceDescriptor(typeof(IApplicationCache), typeof(ApplicationCache), ServiceLifetime.Transient);
             services.Add(serviceDescriptor);
             services.Add(new ServiceDescriptor(typeof(ISessionCache), typeof(SessionCache), ServiceLifetime.Transient));
-            services.AddSingleton<IRepoDepartment, RepoDepartment>();
+            services.AddTransient<IRepoDepartment, RepoDepartment>();
+            services.AddTransient<ISerializer, NewtonSoftSerializer>();
+            services.AddTransient<IRequestClient, RequestClient>();
+            services.AddTransient<IXmlManager, XmlManager>();
+            services.AddTransient<ITextFileManager, TextFileManager>();
+           
         }
 
         //------------------------------------------------------------------------------------------------------
