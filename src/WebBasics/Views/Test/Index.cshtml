@@ -15,6 +15,9 @@
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divDatabase" aria-expanded="false" aria-controls="divDatabase">
         Database
     </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divWebIntegration" aria-expanded="false" aria-controls="divWebIntegration">
+        WebIntegration
+    </button>
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divCommunication" aria-expanded="false" aria-controls="divCommunication">
         Communication
     </button>
@@ -27,8 +30,11 @@
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divAuthentication" aria-expanded="false" aria-controls="divAuthentication">
         Authentication
     </button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divCloudServices" aria-expanded="false" aria-controls="divCloudServices">
+        Cloud Services
+    </button>
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divSearch" aria-expanded="false" aria-controls="divSearch">
-        Search
+        Search Engines
     </button>
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divReports" aria-expanded="false" aria-controls="divReports">
         Reports
@@ -131,6 +137,46 @@
                 <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
             </tr>
             <tr class="danger">
+                <td>TestApi/SendSMS</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/ReadFromSocket</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/WriteToSocket</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/ReadFromMessageQueue</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/WriteToMessageQueue</td>
+                <td><input type="text" class="form-control input-sm" value='' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
+<div id="divWebIntegration" class="collapse">
+    <table class="table table-hover table-striped input-sm">
+        <thead>
+            <tr class="myGradient">
+                <th class="col-xs-2">Method</th>
+                <th class="col-xs-9">Parameters</th>
+                <th class="col-xs-1">Execute</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="danger">
                 <td>TestApi/TestIntegration</td>
                 <td><input type="text" class="form-control input-sm" value='{Id:"1", Name:"Samy"}' /></td>
                 <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
@@ -148,6 +194,16 @@
             <tr class="danger">
                 <td>TestApi/DownloadFileToServer</td>
                 <td><input type="text" class="form-control input-sm" value='{Url:"http://en.wikipedia.org/", FileName:"c:\\Temp\\testDownloadFromSite.html"}' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/RequestManagerGet</td>
+                <td><input type="text" class="form-control input-sm" value='EndPoint Object' /></td>
+                <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Get'></td>
+            </tr>
+            <tr class="danger">
+                <td>TestApi/RequestManagerPostAsJson</td>
+                <td><input type="text" class="form-control input-sm" value='EndPoint Object' /></td>
                 <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
             </tr>
         </tbody>
@@ -172,7 +228,7 @@
             </tr>
             <tr class="danger">
                 <td>TestApi/SetObjectToXml</td>
-                <td><input type="text" class="form-control input-sm" value='{ FileName:"\\test\\EndPoints.xml" ,  "EndPoints": {EndPointsEndPoint: [ {  "ApiMethod": "mehod1",   "CacheKey": "cache1" } , { "ApiMethod": "mehod2",    "CacheKey": "cache2" }  ]  } }' /></td>
+                <td><input type="text" class="form-control input-sm" value='{ FileName:"\\test\\EndPoints.xml" ,  "EndPoints": {EndPoint: [ {  "ApiMethod": "mehod1",   "CacheKey": "cache1" } , { "ApiMethod": "mehod2",    "CacheKey": "cache2" }  ]  } }' /></td>
                 <td><input type="button" class="btn btn-xs btn-block btn-info" onclick='executeTestMethod(this)' value='Post'></td>
             </tr>
             <tr class="danger">

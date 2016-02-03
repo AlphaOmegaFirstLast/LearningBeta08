@@ -21,15 +21,15 @@ namespace WebBasics.Controllers
         private readonly IApplicationCache _appCache;
         private readonly ISessionCache _sessionCache;
         private readonly IRequestClient _requestClient;
-        private readonly IXmlManager _xmlManager;
+        private readonly IXmlFileManager _xmlFileManager;
         private readonly ITextFileManager _textFileManager;
 
 
-        public TestApiController(IApplicationCache appCache, ISessionCache sessionCache, IXmlManager xmlManager, IRequestClient requestClient, ITextFileManager textFileManager)
+        public TestApiController(IApplicationCache appCache, ISessionCache sessionCache, IXmlFileManager xmlFileManager, IRequestClient requestClient, ITextFileManager textFileManager)
         {
             _appCache = appCache;
             _sessionCache = sessionCache;
-            _xmlManager = xmlManager;
+            _xmlFileManager = xmlFileManager;
             _requestClient = requestClient;
             _textFileManager = textFileManager;
         }
@@ -66,19 +66,34 @@ namespace WebBasics.Controllers
             return testCache;
         }
 
-        [HttpGet("GetXml")]
-        public ApiResponse<EndPoints> GetXml(string fileName)
+        [HttpGet("GetObjectFromXml")]
+        public ApiResponse<EndPoints> GetObjectFromXml([FromQuery]string fileName)
         {
-            var response = _xmlManager.Get<EndPoints>(fileName);
+            var response = _xmlFileManager.ReadXml<EndPoints>(fileName);
             return response;
         }
 
-        [HttpPost("SetXml")]
-        public ApiResponse<EndPoints> SetXml([FromBody]TestXml testXml)
+        [HttpPost("SetObjectToXml")]
+        public ApiResponse<EndPoints> SetObjectToXml([FromBody] TestXml testXml)
         {
-            var response = _xmlManager.Set<EndPoints>(testXml.FileName, testXml.EndPoints);
+            var response = _xmlFileManager.WriteXml<EndPoints>(testXml.FileName, testXml.EndPoints);
             return response;
         }
+
+        [HttpGet("ReadTextFromFile")]
+        public async Task<ApiResponse<string>> ReadTextFromFile([FromQuery]string fileName)
+        {
+            var response = await _textFileManager.ReadText(fileName);
+            return response;
+        }
+
+        [HttpPost("WriteTextToFile")]
+        public async Task<ApiResponse<string>> WriteTextToFile([FromBody] TestText testText)
+        {
+            var response = await _textFileManager.WriteText(testText.FileName, testText.Text);
+            return response;
+        }
+
 
         [HttpPost("TestIntegration")]
         [HttpGet("TestIntegration")]
@@ -113,39 +128,14 @@ namespace WebBasics.Controllers
             var response = await _requestClient.PostJsonAsync(url, testRequest);
             return response;
         }
+
         [HttpPost("DownloadFileToServer")]
         public async Task<ApiResponse<string>> DownloadFileToServer([FromBody] TestDownload testDownload)
         {
             var response = await _requestClient.DownloadFileAsync(testDownload.Url, testDownload.FileName);
             return response;
         }
-        [HttpGet("GetObjectFromXml")]
-        public ApiResponse<EndPoints> GetObjectFromXml([FromQuery]string fileName)
-        {
-            var response = _xmlManager.Get<EndPoints>(fileName);
-            return response;
-        }
 
-        [HttpPost("SetObjectToXml")]
-        public ApiResponse<EndPoints> SetObjectToXml([FromBody] TestXml testXml)
-        {
-            var response = _xmlManager.Set<EndPoints>(testXml.FileName, testXml.EndPoints);
-            return response;
-        }
-
-        [HttpGet("ReadTextFromFile")]
-        public async Task<ApiResponse<string>> ReadTextFromFile([FromQuery]string fileName)
-        {
-            var response = await _textFileManager.ReadText(fileName);
-            return response;
-        }
-
-        [HttpPost("WriteTextToFile")]
-        public async Task<ApiResponse<string>> WriteTextToFile([FromBody] TestText testText)
-        {
-            var response = await _textFileManager.WriteText(testText.FileName, testText.Text);
-            return response;
-        }
 
         [HttpPost("SendEmail")]
         public async Task<ApiResponse<string>> SendEmail([FromBody]EmailInfo emailInfo)

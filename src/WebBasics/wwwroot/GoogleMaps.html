@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2>Google Maps JavaScript API </h2>
+    <hr />
+
+    <table>
+        <tr>
+            <td>
+                <h4>Geocoder: Convert address to latitude and longtude</h4>
+                <div id="floating-panel" >
+                    <input id="address" type="text" style="width: 400px;" value="165 Willarong NSW 2229 Sydney">
+                    <input id="submit" type="button" value="Geocode">
+                </div>
+            </td>
+            <td rowspan="2" style="vertical-align:top;">
+                <h4>Results</h4>
+                <textarea id="txtResults" style="min-height: 600px; height: auto; width: 600px; "></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Basic Map</h4>
+                <div id="map" style="height: 400px; width: 400px; margin: auto;"></div>
+            </td>
+        </tr>
+    </table>
+
+
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: { lat: -34.397, lng: 150.644 }
+            });
+
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress(geocoder, map);
+            });
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                    var jsonResults = document.getElementById('txtResults');
+                    jsonResults.value = JSON.stringify(results, null, 3);
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwowcnVymn8cXobuT0ae_UF_jevJ_yc5M&callback=initMap" async defer></script>
+
+</body>
+
+</html>

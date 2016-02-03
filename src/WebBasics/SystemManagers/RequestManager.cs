@@ -13,60 +13,43 @@ namespace WebBasics.SystemManagers
     public class RequestManager
     {
         private readonly IRequestClient _requestClient;
-        private readonly IApplicationCache _cache;
         private readonly ISerializer _serializer;
 
-        public RequestManager(IRequestClient requestClient, IApplicationCache cache, ISerializer serializer)
+        public RequestManager(IRequestClient requestClient, ISerializer serializer)
         {
             _requestClient = requestClient;
-            _cache = cache;
             _serializer = serializer;
         }
 
-        public async Task<ApiResponse<T>> ExecuteRequest<T, TP>(RequestEndPoint endpoint, TP objParam)
+        public async Task<ApiResponse<T>> ExecuteRequest<T, TP>(SystemModels.EndPoint endpoint, TP objParam)
         {
             var response = new ApiResponse<T>();
-
-            //-------------------------- try get from cache --------------------------
-            var cacheKey = string.Empty;
-            if (endpoint.GetFromCache && endpoint.CacheTimeMin > 0)
-            {
-                cacheKey = GetCacheKeyWithParam(endpoint.CacheKey, objParam);
-                response = _cache.Get<T>(cacheKey, endpoint.IsCacheSerialized);
-                if (response.Status.Ok && response.Data != null)
-                    return response;
-            }
-            //------------------------- send request ---------------------------------
-
             var webResponse = new ApiResponse<string>();
-            var headers = GetHeadersFromString(endpoint.Headers);
+
+            //------------------------- Get Headers ---------------------------------
+
+            Dictionary<string,string> headers = null;
+            if (endpoint.Headers != null && endpoint.Headers.Header != null)
+            {
+                headers = endpoint.Headers.Header.ToDictionary(x => x.Key, x => x.Value);
+            }
+            //------------------------- Send Request ---------------------------------
+
             switch (endpoint.HttpMethod.ToUpper())
             {
                 case "GET":
-                    webResponse = await _requestClient.GetAsync(endpoint.Url, headers);  //todo pass param
+                    var url = GetRequestUrl<TP>(endpoint.ApiMethod, objParam);
+                    webResponse = await _requestClient.GetAsync(url, headers);  //todo pass param
                     break;
                 case "POST":
-                    webResponse = await _requestClient.PostJsonAsync<TP>(endpoint.Url, objParam, headers);
+                    webResponse = await _requestClient.PostJsonAsync<TP>(endpoint.ApiMethod, objParam, headers);
                     break;
             }
-            //------------------------- handle response -----------------------------
+            //------------------------- Deserialize Response -----------------------------
 
-            if (webResponse.Status.Ok && webResponse.Data != null) // desrialize n cache
+            if (webResponse.Status.Ok && webResponse.Data != null) // desrialize 
             {
                 response = _serializer.Deserialize<T>(webResponse.Data);
-
-                //--------------------- set cache ------------------------------------ 
-                if (response.Status.Ok && endpoint.CacheTimeMin > 0)
-                {
-                    if (endpoint.IsCacheSerialized)
-                    {
-                        _cache.Set(cacheKey, webResponse.Data);   //cache serialized result
-                    }
-                    else
-                    {
-                        _cache.Set(cacheKey, response.Data);      //cache desialized result
-                    }
-                }
             }
             else
             {
@@ -76,33 +59,8 @@ namespace WebBasics.SystemManagers
             return response;
         }
 
-        private string GetCacheKeyWithParam<T>(string cacheKey, T objParam)
-        {
-            if (objParam != null)
-            {
-                var serializeResponse = _serializer.Serialize(objParam);
-                if (serializeResponse.Status.Ok)
-                {
-                    cacheKey = cacheKey + serializeResponse.Data;
-                }
-            }
-            return cacheKey;
-        }
-
-        private Dictionary<string, string> GetHeadersFromString(string headers)
-        {
-            if (!string.IsNullOrEmpty(headers))
-            {
-                var deserializeResponse = _serializer.Deserialize<Dictionary<string, string>>(headers);
-                if (deserializeResponse.Status.Ok)
-                {
-                    return deserializeResponse.Data;
-                }
-            }
-            return null;
-        }
-
-        public static string GetRequestUrl<T>(string requestUrl, T param)  //todo currently not used
+        //--------------------------------------------------------------------------------------------------
+        private static string GetRequestUrl<T>(string requestUrl, T param)  
         {
             if (param != null)
             {

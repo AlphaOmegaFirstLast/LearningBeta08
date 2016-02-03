@@ -1,51 +1,43 @@
-﻿namespace WebBasics.SystemModels
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace WebBasics.SystemModels
 {
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class EndPoints
+    [XmlRoot(ElementName = "EndPoints")]
+    public class EndPoints
     {
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("EndPoint")]
-        public EndPointsEndPoint[] EndPointsEndPoint { get; set; }
+        [XmlElement(ElementName = "EndPoint")]
+        public List<EndPoint> EndPoint { get; set; }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class EndPointsEndPoint
+    [XmlRoot(ElementName = "EndPoint")]
+    public class EndPoint
     {
-        /// <remarks/>
+        [XmlElement(ElementName = "apiMethod")]
         public string ApiMethod { get; set; }
-
-        /// <remarks/>
-        public string Headers { get; set; }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlElement(ElementName = "Headers")]
+        public Headers Headers { get; set; }
+        [XmlAttribute(AttributeName = "Name")]
         public string Name { get; set; }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CacheKey { get; set; }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int CacheTimeMin { get; set; }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool GetFromCache { get; set; }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute(AttributeName = "HttpMethod")]
         public string HttpMethod { get; set; }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IsCacheSerialized { get; set; }
     }
 
+    [XmlRoot(ElementName = "Headers")]
+    public class Headers
+    {
+        [XmlElement(ElementName = "Header")]
+        public List<Header> Header { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Header")]
+    public class Header
+    {
+        [XmlAttribute(AttributeName = "key")]
+        public string Key { get; set; }
+        [XmlAttribute(AttributeName = "value")]
+        public string Value { get; set; }
+    }
 
 
 }

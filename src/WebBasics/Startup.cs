@@ -54,7 +54,7 @@ namespace WebBasics
             services.AddTransient<IRepoDepartment, RepoDepartment>();
             services.AddTransient<ISerializer, NewtonSoftSerializer>();
             services.AddTransient<IRequestClient, RequestClient>();
-            services.AddTransient<IXmlManager, XmlManager>();
+            services.AddTransient<IXmlFileManager, XmlFileManager>();
             services.AddTransient<ITextFileManager, TextFileManager>();
            
         }
