@@ -1,0 +1,81 @@
+<table id="tblReportButtons" class="tblCriteriaGeneratorLayOut">
+  <tr >
+    <td/>
+    <td/>
+    <td>
+      <input type="button" id="btnReportSave" onclick="onReportExport()" value="Export Data"/>
+    </td>
+    <td>
+      <input type="button" id="btnReportSave" onclick="onReportSave()" value="Save Criteria"/>
+    </td>   
+    <td>
+      <input type="button" id="btnReportPreview" onclick="onReportPreview()" value="Preview"/>
+    </td>   
+  </tr>
+</table>
+  
+<table id="tblSearchButtons" class="tblCriteriaGeneratorLayOut">
+  <tr>
+    <td>
+      <input type="button" id="bCancelSearch" onclick="onPrintSearch()" value="Preview to print"/> 
+    </td>
+    <td>
+      <input type="button" id="bCancelSearch" onclick="onCancelSearch()" value="Cancel"/> 
+    </td>
+    <td>
+      <input type="button" id="bSelectSearch" onclick="onSelectSearch()" value="Select"/>
+    </td>
+    <td style="display:none;">/&gt;</td>
+    <td>
+      <input type="button" id="bSearch" onclick="onSearch()" value="Search"/>
+    </td>
+  </tr>
+</table>
+  
+<table class="tblCriteriaGeneratorLayOut">
+  <tr>
+    <td id="tdDisplayFields">
+      <table class="tblCriteriaGenerator" id="tblDisplayFields">
+        <tr>
+          <td colspan="2">Display Fields</td>
+        </tr>
+      </table>
+    </td>
+    <td id="tdValueFilterFields">
+      <table class="tblCriteriaGenerator" id="tblValueFilterFields">
+        <tr>
+          <td colspan="3">Value Filters</td>
+        </tr>
+      </table>
+    </td>
+    <td id="tdRangeFilterFields">
+      <table class="tblCriteriaGenerator" id="tblRangeFilterFields">
+        <tr>
+          <td colspan="3">Range Filters</td>
+        </tr>
+      </table>
+    </td>
+    
+    <td id="tdGroupByFields">
+      <table class="tblCriteriaGenerator" id="tblGroupByFields">
+        <tr>
+          <td colspan="3">Group By</td>
+        </tr>
+      </table>
+      <br/>
+      <table class="tblCriteriaGenerator" id="tblSummaryTypes">
+        <tr>
+          <td colspan="3">Summary Type</td>
+        </tr>
+      </table>
+
+    </td>
+    <td id="tdOrderByFields">
+      <table class="tblCriteriaGenerator" id="tblOrderByFields">
+        <tr>
+          <td colspan="3">Order By</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

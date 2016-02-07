@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myController as criteria">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <script src="js/scriptAngularReports.js"></script>
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-1">
+            <label>Reports:</label>
+        </div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-default" value="Preview to Print" />
+        </div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-default" value="Save Criteria" />
+        </div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-default" value="Export Data" />
+        </div>
+        <div class="col-sm-1">
+            <label>Search:</label>
+        </div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-default" value="Preview to Select" />
+        </div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-default" value="Select" />
+        </div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-default" value="Cancel" />
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-1">
+            <span>Display Fields</span>
+            <hr />
+            <table>
+                <tr ng-repeat="field in criteria.criteriaFields">
+                    <td> <input type="checkbox" ng-model="field.ckDisplayChecked" ng-disabled="field.ckDisplayDisabled" /></td>
+                    <td> {{field.caption}}: {{field.rdGroupChecked}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            Value Filters
+            <hr />
+            <table>
+                <tr ng-repeat="field in criteria.criteriaFields">
+                    <td>
+                        <input type="checkbox" ng-model="field.ckFilterChecked" ng-click="criteria.clickFilter(field)" ng-disabled="field.ckFilterDisabled" />
+                    </td>
+                    <td>
+                        {{field.caption}}
+                    </td>
+                    <td>
+                        <input type="text" ng-model="field.filterControlValue" ng-disabled="criteria.not(field.ckFilterChecked)" />
+                    </td>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <span>Range Filters</span>
+            <hr />
+            <table ng-repeat="field in criteria.criteriaFields">
+                <tr>
+                    <td>
+                        <input type="checkbox" ng-model="field.ckFilterChecked" ng-click="criteria.clickFilter(field)" ng-disabled="field.ckFilterDisabled" />
+                    </td>
+                    <td>
+                        {{field.caption}}
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        From
+                    </td>
+                    <td>
+                        <input type="text" ng-model="field.filterControlFromValue" ng-disabled="criteria.not(field.ckFilterChecked)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        To
+                    </td>
+                    <td>
+                        <input type="text" ng-model="field.filterControlToValue" ng-disabled="criteria.not(field.ckFilterChecked)" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-2">
+            <span>Group By</span>{{criteria.GroupBy}}
+            <hr />
+            <table>
+                <tr ng-repeat="field in criteria.criteriaFields">
+                    <td>
+                        <input type="radio" ng-model="criteria.GroupBy" ng-value="field.field" ng-click="criteria.clickGroupBy(field)" ng-selected="field.rdGroupChecked" ng-disabled="field.rdGroupDisabled" />
+                    </td>
+                    <td>
+                        {{field.caption}}
+                    </td>
+            </table>
+            <hr />
+            <span>Summary Type</span>
+        </div>
+        <div class="col-sm-1">
+            <span>Order By</span>{{criteria.OrderBy}}
+            <hr />
+            <table>
+                <tr ng-repeat="field in criteria.criteriaFields">
+                    <td>
+                        <input type="radio" ng-model="criteria.OrderBy" ng-value="field.field" ng-click="criteria.clickOrderBy(field)" ng-selected="field.rdOrderChecked" ng-disabled="field.rdOrderDisabled" />
+                    </td>
+                    <td>
+                        {{field.caption}}
+                    </td>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
