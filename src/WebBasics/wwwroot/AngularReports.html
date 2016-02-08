@@ -34,7 +34,10 @@
             <input type="button" class="btn btn-default" value="Cancel" />
         </div>
     </div>
-    <hr />
+<hr/>
+{{criteria.Criteria()}}
+<hr/>
+<div style="width: 80%; margin: auto;">
     <div class="row">
         <div class="col-sm-1">
             <span>Display Fields</span>
@@ -42,7 +45,7 @@
             <table>
                 <tr ng-repeat="field in criteria.criteriaFields">
                     <td> <input type="checkbox" ng-model="field.ckDisplayChecked" ng-disabled="field.ckDisplayDisabled" /></td>
-                    <td> {{field.caption}}: {{field.rdGroupChecked}}</td>
+                    <td> {{field.caption}}</td>
                 </tr>
             </table>
         </div>
@@ -50,9 +53,9 @@
             Value Filters
             <hr />
             <table>
-                <tr ng-repeat="field in criteria.criteriaFields">
+                <tr ng-repeat="field in criteria.criteriaFields | filter:{isValueFilter:true}" >
                     <td>
-                        <input type="checkbox" ng-model="field.ckFilterChecked" ng-click="criteria.clickFilter(field)" ng-disabled="field.ckFilterDisabled" />
+                        <input type="checkbox" ng-model="field.ckFilterChecked" ng-click="criteria.clickValueFilter(field)" ng-disabled="field.ckFilterDisabled" />
                     </td>
                     <td>
                         {{field.caption}}
@@ -65,39 +68,39 @@
         <div class="col-sm-4">
             <span>Range Filters</span>
             <hr />
-            <table ng-repeat="field in criteria.criteriaFields">
-                <tr>
-                    <td>
-                        <input type="checkbox" ng-model="field.ckFilterChecked" ng-click="criteria.clickFilter(field)" ng-disabled="field.ckFilterDisabled" />
-                    </td>
-                    <td>
+            <div ng-repeat="field in criteria.criteriaFields  | filter:{isRangeFilter:true}" >
+                <div class="row">
+                    <div class="col-sm-1">
+                        <input type="checkbox" ng-model="field.ckFilterChecked"  ng-disabled="field.ckFilterDisabled" />
+                    </div>
+                    <div class="col-sm-3">
                         {{field.caption}}
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
+                    </div>
+                    <div class="col-sm-8">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
                         From
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-sm-8">
                         <input type="text" ng-model="field.filterControlFromValue" ng-disabled="criteria.not(field.ckFilterChecked)" />
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
                         To
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-sm-8">
                         <input type="text" ng-model="field.filterControlToValue" ng-disabled="criteria.not(field.ckFilterChecked)" />
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-sm-2">
-            <span>Group By</span>{{criteria.GroupBy}}
+            <span>Group By</span>
             <hr />
             <table>
                 <tr ng-repeat="field in criteria.criteriaFields">
@@ -112,7 +115,7 @@
             <span>Summary Type</span>
         </div>
         <div class="col-sm-1">
-            <span>Order By</span>{{criteria.OrderBy}}
+            <span>Order By</span>
             <hr />
             <table>
                 <tr ng-repeat="field in criteria.criteriaFields">
@@ -125,6 +128,8 @@
             </table>
         </div>
     </div>
+    
+</div>
 
 </body>
 </html>
