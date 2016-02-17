@@ -5,7 +5,7 @@
 
     app.controller('myController', function () {
 
-        this.criteriaFields = [];
+        this.CriteriaFields = [];
         this.GroupBy = "default";
         this.OrderBy = "default";
         /*-- -------------------------------------------- --*/
@@ -15,19 +15,20 @@
 
             objCriteria.groupByFields.push(this.GroupBy);
             objCriteria.orderByFields.push(this.OrderBy);
-            $.each(this.criteriaFields, function (i, field) {
-                if (field.ckDisplayChecked) {
+
+            $.each(this.CriteriaFields, function (i, field) {
+                if (field.isDisplayChecked) {
                     objCriteria.displayFields.push(field.field);
                 }
             });
-            $.each(this.criteriaFields, function (i, field) {
-                if (field.isValueFilter && field.ckFilterChecked) {
+            $.each(this.CriteriaFields, function (i, field) {
+                if (field.isValueFilter && field.isFilterChecked) {
                     var filter = { filter: field.field, value: field.filterControlValue };
                     objCriteria.valueFilters.push(filter);
                 }
             });
-            $.each(this.criteriaFields, function (i, field) {
-                if (field.isRangeFilter && field.ckFilterChecked) {
+            $.each(this.CriteriaFields, function (i, field) {
+                if (field.isRangeFilter && field.isFilterChecked) {
                     var filter = { filter: field.field, fromValue: field.filterControlFromValue, toValue: field.filterControlToValue };
                     objCriteria.rangeFilters.push(filter);
                 }
@@ -40,30 +41,32 @@
         this.init = function () {
             var field;
             field = new CriteriaField("default", "default");
-            field.rdGroupChecked = true;
-            field.rdOrderChecked = true;
-            this.criteriaFields.push(field);
+            field.isGroupChecked = true;
+            field.isOrderChecked = true;
+            this.CriteriaFields.push(field);
 
             field = new CriteriaField("id", "Id");
             field.isValueFilter = false;
-            this.criteriaFields.push(field);
+            this.CriteriaFields.push(field);
 
             field = new CriteriaField("name", "Name");
             field.isRangeFilter = false;
-            this.criteriaFields.push(field);
+            this.CriteriaFields.push(field);
         };
         /*-- -------------------------------------------- --*/
 
         this.clickValueFilter = function (field) {
 
-            if (field.ckFilterChecked) {
+            if (field.isFilterChecked) {
 
-                field.ckDisplayChecked = false;
-                field.ckDisplayDisabled = true;
-                field.rdGroupDisabled = true;
+                field.isDisplayChecked = false;
+                field.isDisplayDisabled = true;
+                field.isGroupDisabled = true;
+                field.isOrderDisabled = true;
             } else {
-                field.ckDisplayDisabled = false;
-                field.rdGroupDisabled = false;
+                field.isDisplayDisabled = false;
+                field.isGroupDisabled = false;
+                field.isOrderDisabled = false;
                 field.filterControlValue = "";
             }
         };
@@ -73,42 +76,46 @@
 
             this.resetGroupBy();
             this.GroupBy = field.field;                             //in case function is called from other codes
-            field.rdGroupChecked = true;
+            field.isGroupChecked = true;
 
-            field.ckDisplayChecked = false;
-            field.ckDisplayDisabled = true;
+            field.isDisplayChecked = false;
+            field.isDisplayDisabled = true;
 
-            field.ckFilterChecked = false;
-            field.ckFilterDisabled = true;
+            field.isFilterChecked = false;
+            field.isFilterDisabled = true;
 
-            if (field.rdOrderChecked) {                             //set order to default
-                this.clickOrderBy(this.criteriaFields[0]);
+            if (field.isOrderChecked) {                             //set order to default
+                this.clickOrderBy(this.CriteriaFields[0]);
             }
-            field.rdOrderChecked = false;
-            field.rdOrderDisabled = true;
+            field.isOrderChecked = false;
+            field.isOrderDisabled = true;
         };
         /*-- -------------------------------------------- --*/
+
         this.clickOrderBy = function (field) {
             this.OrderBy = field.field;                             //in case function is called from other codes
-            field.rdOrderChecked = true;
-            field.ckDisplayChecked = true;
+            field.isOrderChecked = true;
+            field.isDisplayChecked = true;
         };
         /*-- -------------------------------------------- --*/
+
         this.resetGroupBy = function () {
-            $.each(this.criteriaFields, function (i, field) {
-                if (field.rdGroupChecked) {
-                    field.rdGroupChecked = false;
-                    field.ckFilterDisabled = false;
-                    field.ckDisplayDisabled = false;
-                    field.rdOrderDisabled = false;
+            $.each(this.CriteriaFields, function (i, field) {
+                if (field.isGroupChecked) {
+                    field.isGroupChecked = false;
+                    field.isFilterDisabled = false;
+                    field.isDisplayDisabled = false;
+                    field.isOrderDisabled = false;
                 }
             });
         };
         /*-- -------------------------------------------- --*/
+
         this.not = function (boolValue) {
             return !boolValue;
         };
         /*-- -------------------------------------------- --*/
+
         this.init();
     });
 })();
@@ -125,11 +132,11 @@ var CriteriaField = function (field, caption) {
     this.isGroupBy = true;
     this.isOrderBy = true;
 
-    this.ckDisplayChecked = false;
-    this.ckDisplayDisabled = false;
+    this.isDisplayChecked = false;
+    this.isDisplayDisabled = false;
 
-    this.ckFilterChecked = false;
-    this.ckFilterDisabled = false;
+    this.isFilterChecked = false;
+    this.isFilterDisabled = false;
 
     this.filterControlType = "text";
 
@@ -142,10 +149,10 @@ var CriteriaField = function (field, caption) {
     this.filterControlToDisabled = false;
     this.filterControlToValue = "";
 
-    this.rdGroupChecked = false;            //to keep track of control behaviuor
-    this.rdGroupDisabled = false;
+    this.isGroupChecked = false;            //to keep track of control behaviuor
+    this.isGroupDisabled = false;
 
-    this.rdOrderChecked = false;            //to keep track of control behaviuor
-    this.rdOrderDisabled = false;
+    this.isOrderChecked = false;            //to keep track of control behaviuor
+    this.isOrderDisabled = false;
 };
 

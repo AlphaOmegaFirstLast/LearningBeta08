@@ -56,7 +56,7 @@ namespace WebBasics
             services.AddTransient<IRequestClient, RequestClient>();
             services.AddTransient<IXmlFileManager, XmlFileManager>();
             services.AddTransient<ITextFileManager, TextFileManager>();
-           
+            services.AddTransient<IReportManager, ReportManager>();
         }
 
         //------------------------------------------------------------------------------------------------------

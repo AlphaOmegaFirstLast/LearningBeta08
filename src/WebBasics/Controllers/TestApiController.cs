@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Linq;
+using WebBasics.BusinessModels;
 using WebBasics.SystemInterfaces;
 using WebBasics.SystemModels;
 using WebBasics.TestModels;
@@ -23,15 +24,16 @@ namespace WebBasics.Controllers
         private readonly IRequestClient _requestClient;
         private readonly IXmlFileManager _xmlFileManager;
         private readonly ITextFileManager _textFileManager;
+        private readonly IReportManager _reportManager;
 
-
-        public TestApiController(IApplicationCache appCache, ISessionCache sessionCache, IXmlFileManager xmlFileManager, IRequestClient requestClient, ITextFileManager textFileManager)
+        public TestApiController(IApplicationCache appCache, ISessionCache sessionCache, IXmlFileManager xmlFileManager, IRequestClient requestClient, ITextFileManager textFileManager, IReportManager reportManager)
         {
             _appCache = appCache;
             _sessionCache = sessionCache;
             _xmlFileManager = xmlFileManager;
             _requestClient = requestClient;
             _textFileManager = textFileManager;
+            _reportManager = reportManager;
         }
 
         [HttpGet("GetAppCache")]
@@ -133,6 +135,18 @@ namespace WebBasics.Controllers
         public async Task<ApiResponse<string>> DownloadFileToServer([FromBody] TestDownload testDownload)
         {
             var response = await _requestClient.DownloadFileAsync(testDownload.Url, testDownload.FileName);
+            return response;
+        }
+
+        [HttpPost("GetReports")]
+        public async Task<ApiResponse<dynamic>> GetReports([FromBody]ApiReportCriteria testReportCriteria)
+        {
+            var response = new ApiResponse<dynamic>();
+            var departments = _reportManager.CriteriaToLinq(testReportCriteria);
+           // departments = new List<Department>() {new Department() {Id=100, Name = "depart100"} , new Department() { Id = 200, Name = "depart200" } };
+            response.Data = departments;
+            response.ReportCriteria = testReportCriteria;
+            response.RequestInfo.Controller = this.Request.Headers["referer"];
             return response;
         }
 

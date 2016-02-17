@@ -18,7 +18,8 @@
     "Microsoft.AspNet.Session": "1.0.0-beta8",
     "Microsoft.AspNet.Mvc.WebApiCompatShim": "6.0.0-beta8",
     "EntityFramework.SqlServer": "7.0.0-beta8",
-    "EntityFramework.Commands": "7.0.0-beta8"
+    "EntityFramework.Commands": "7.0.0-beta8",
+    "System.Linq.Dynamic.Library": "1.1.14"
   },
 
   "commands": {

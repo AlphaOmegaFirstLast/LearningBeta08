@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.Entity;
 using WebBasics.BusinessEntityFrameWork;
 using WebBasics.BusinessInterfaces;
 using WebBasics.BusinessModels;
@@ -11,7 +12,14 @@ namespace WebBasics.BusinessRepository
 {
     public class RepoDepartment: IRepoDepartment
     {
-        static List<Department> _itemsList = new List<Department>();
+        private readonly BusinessContext _dbContext;
+        private readonly List<Department> _itemsList = new List<Department>(); // to test linq IEnumerable
+
+        public RepoDepartment(BusinessContext dbContext)
+        {
+            _dbContext = dbContext;
+          //  _itemsList = _dbContext.Departments; // to test linq IQuerable
+        }
 
         public IEnumerable<Department> GetAll()
         {

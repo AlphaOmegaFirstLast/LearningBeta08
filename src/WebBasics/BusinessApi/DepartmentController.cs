@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using WebBasics.BusinessEntityFrameWork;
 using WebBasics.BusinessInterfaces;
 using WebBasics.BusinessModels;
 
@@ -12,8 +13,10 @@ using WebBasics.BusinessModels;
 namespace WebBasics.BusinessApi
 {
     //[Route("api/[controller]")]
-    public class DepartmentController : Controller
+    public class BusinessDepartmentController : Controller
     {
+
+
         [FromServices]
         public IRepoDepartment RepoDepartment { get; set; } 
 

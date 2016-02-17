@@ -132,6 +132,15 @@
           "lib/net45/EntityFramework.SqlServer.dll": {}
         }
       },
+      "FluentValidationNA/1.2.16": {
+        "type": "package",
+        "compile": {
+          "lib/net40/FluentValidationNA.dll": {}
+        },
+        "runtime": {
+          "lib/net40/FluentValidationNA.dll": {}
+        }
+      },
       "Ix-Async/1.2.5": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1764,6 +1773,18 @@
           "lib/net45/_._": {}
         }
       },
+      "System.Linq.Dynamic.Library/1.1.14": {
+        "type": "package",
+        "dependencies": {
+          "FluentValidationNA": "1.2.16"
+        },
+        "compile": {
+          "lib/net40/System.Linq.Dynamic.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Linq.Dynamic.dll": {}
+        }
+      },
       "System.Numerics.Vectors/4.1.1-beta-23409": {
         "type": "package",
         "dependencies": {
@@ -2023,6 +2044,15 @@
         },
         "runtime": {
           "lib/net45/EntityFramework.SqlServer.dll": {}
+        }
+      },
+      "FluentValidationNA/1.2.16": {
+        "type": "package",
+        "compile": {
+          "lib/net40/FluentValidationNA.dll": {}
+        },
+        "runtime": {
+          "lib/net40/FluentValidationNA.dll": {}
         }
       },
       "Ix-Async/1.2.5": {
@@ -3660,6 +3690,18 @@
           "lib/net45/_._": {}
         }
       },
+      "System.Linq.Dynamic.Library/1.1.14": {
+        "type": "package",
+        "dependencies": {
+          "FluentValidationNA": "1.2.16"
+        },
+        "compile": {
+          "lib/net40/System.Linq.Dynamic.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Linq.Dynamic.dll": {}
+        }
+      },
       "System.Numerics.Vectors/4.1.1-beta-23409": {
         "type": "package",
         "dependencies": {
@@ -3919,6 +3961,15 @@
         },
         "runtime": {
           "lib/net45/EntityFramework.SqlServer.dll": {}
+        }
+      },
+      "FluentValidationNA/1.2.16": {
+        "type": "package",
+        "compile": {
+          "lib/net40/FluentValidationNA.dll": {}
+        },
+        "runtime": {
+          "lib/net40/FluentValidationNA.dll": {}
         }
       },
       "Ix-Async/1.2.5": {
@@ -5556,6 +5607,18 @@
           "lib/net45/_._": {}
         }
       },
+      "System.Linq.Dynamic.Library/1.1.14": {
+        "type": "package",
+        "dependencies": {
+          "FluentValidationNA": "1.2.16"
+        },
+        "compile": {
+          "lib/net40/System.Linq.Dynamic.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Linq.Dynamic.dll": {}
+        }
+      },
       "System.Numerics.Vectors/4.1.1-beta-23409": {
         "type": "package",
         "dependencies": {
@@ -5780,6 +5843,21 @@
         "lib/dotnet/EntityFramework.SqlServer.xml",
         "lib/net45/EntityFramework.SqlServer.dll",
         "lib/net45/EntityFramework.SqlServer.xml"
+      ]
+    },
+    "FluentValidationNA/1.2.16": {
+      "type": "package",
+      "sha512": "6VVx9+/okkhSWEHS4PDRQZPVz+fUTBX5zxMlNnE70ZoMWHv5ZKBT++t2HaTjmm3j71OGEUvSBkXcTJKHUPgQfw==",
+      "files": [
+        "FluentValidationNA.1.2.16.nupkg",
+        "FluentValidationNA.1.2.16.nupkg.sha512",
+        "FluentValidationNA.nuspec",
+        "lib/net35/FluentValidationNA.dll",
+        "lib/net35/FluentValidationNA.XML",
+        "lib/net40/FluentValidationNA.dll",
+        "lib/net40/FluentValidationNA.XML",
+        "lib/portable-net40+sl50+wp80+win/FluentValidationNA.dll",
+        "lib/portable-net40+sl50+wp80+win/FluentValidationNA.XML"
       ]
     },
     "Ix-Async/1.2.5": {
@@ -7286,6 +7364,21 @@
         "System.IO.nuspec"
       ]
     },
+    "System.Linq.Dynamic.Library/1.1.14": {
+      "type": "package",
+      "sha512": "ZBtE4ud9UEqYrNZ2PnMaMB4YeglJa+efDCrYwNr+nlhkBAGhuljILN9rd/gi0rLuE8oXW4pCMcZSsAZI+K9uOg==",
+      "files": [
+        "lib/net35/System.Linq.Dynamic.dll",
+        "lib/net35/System.Linq.Dynamic.XML",
+        "lib/net40/System.Linq.Dynamic.dll",
+        "lib/net40/System.Linq.Dynamic.XML",
+        "lib/sl50/System.Linq.Dynamic.SL.dll",
+        "lib/sl50/System.Linq.Dynamic.SL.XML",
+        "System.Linq.Dynamic.Library.1.1.14.nupkg",
+        "System.Linq.Dynamic.Library.1.1.14.nupkg.sha512",
+        "System.Linq.Dynamic.Library.nuspec"
+      ]
+    },
     "System.Numerics.Vectors/4.1.1-beta-23409": {
       "type": "package",
       "serviceable": true,
@@ -7777,7 +7870,8 @@
       "Microsoft.AspNet.Session >= 1.0.0-beta8",
       "Microsoft.AspNet.Mvc.WebApiCompatShim >= 6.0.0-beta8",
       "EntityFramework.SqlServer >= 7.0.0-beta8",
-      "EntityFramework.Commands >= 7.0.0-beta8"
+      "EntityFramework.Commands >= 7.0.0-beta8",
+      "System.Linq.Dynamic.Library >= 1.1.14"
     ],
     "DNX,Version=v4.5.1": []
   }
